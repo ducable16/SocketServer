@@ -33,6 +33,14 @@ public class DataController {
         }
         return ResponseEntity.ok(messages.get());
     }
+    @GetMapping("/received-messages")
+    public ResponseEntity<?> getReceivedMessages(@RequestParam("username") String username) {
+        Optional<List<Message>> messages = messageRepository.findMessagesByReceiver(username);
+        if(!messages.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(messages.get());
+    }
 
     @GetMapping("/chat-messages")
     public ResponseEntity<?> getChatMessages(@RequestParam String username1, @RequestParam String username2) {

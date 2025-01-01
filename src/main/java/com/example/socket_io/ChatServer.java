@@ -1,15 +1,13 @@
 package com.example.socket_io;
 
-import com.corundumstudio.socketio.SocketIOServer;
 import com.example.socket_io.builder.ServerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class ChatServer {
+public class ChatServer implements CommandLineRunner {
 
     @Autowired
     private ServerBuilder serverBuilder;
@@ -18,10 +16,8 @@ public class ChatServer {
         SpringApplication.run(ChatServer.class, args);
     }
 
-//    @Bean
-//    public CommandLineRunner start(SocketIOServer socketIOServer) {
-//        return args -> {
-//          //  socketIOServer.start();
-//        };
-//    }
+    @Override
+    public void run(String... args) throws Exception {
+        serverBuilder.start();
+    }
 }
